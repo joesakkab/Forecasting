@@ -17,3 +17,4 @@ def regression(df):
 
     # Assign forecast to forecast column
     df['Forecast'] = a + b * df['i']
+    return a, b
