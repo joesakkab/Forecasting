@@ -1,18 +1,11 @@
-import numpy as np
-import pandas as pd
+# Method that returns the moving average of demand
+def moving_average(df, window_size):
+    # Get only demand column
+    data = df.loc[:, 'Demand'].astype(float)
 
-# Define variable for file name 
-sample_data = "BackEnd\Sample-Data.csv"
+    # Get the window of series of observations of specified window size
+    windows = data.rolling(window_size)
 
-# Convert file to dataframe
-df = pd.read_csv(sample_data)
-
-print(df)
-
-# data = []
-# with open(sample_data, 'r') as f:
-#     reader = csv.reader(f)
-#     for row in reader:
-#         data.append(row[1])
-
-# print(data)
+    # Create a series of moving averages of each window and round
+    moving_averages = windows.mean().round(2)
+    df['Forecast'] = moving_averages
